@@ -1,56 +1,159 @@
-# W2D4 - User Authentication with Express
+# Real World HTTP Servers
 
-## http is stateless
+## Content
 
-### What do we mean by statelessness?
+- SECURITY
+- REST
+- Middleware
+- Organizing our code
+- Build JSON API
+- Alternative to Express
 
-- The server doesn't remember you
-- The server process every request like a new request
+## Security
 
-### what is a session
+### Security Issue #1
 
-- Application session is server-side data which servers store to identify incoming client requests, their previous interaction details, and current context information.
+- Storing Passwords - why not plaintext
+- How to encrypt passwords (bcrypt)
+- hashing
 
-### Benefits of http Statelessness
+### Security Issue #2
 
-- Scalability - no session related dependency
-- Less complex - less synchroniztion
-- Easier to chache
-- The server cannot lose track of information
+- User can see data in cookie and modify, becoming any other user
+  = Solution: encrypt the cookie
 
-### Disadvantages
+### Security Issue #3
 
-- cannot easily keep track context
-- context has to provided each time
-- Good transactions. not good for conversations.
+- Stealing cookies
+- HTTP is plain-text
+- Man-in-the-middle (we know NSA, etc. do this)
+- Firesheep: https://en.wikipedia.org/wiki/Firesheep
+- Solution: HTTPS (End-to-End Encryption)
 
-## Using cookies to remember the user
+## REST
 
-### How cookies work
+Representational State Transfer
 
-We did this diagram to explain how cookies work:
+- REST is a pattern, a convention to organize our url structure
 
-- [Cookies Diagram](https://drive.google.com/file/d/1_9FET5lWOAXk1s5gaSkAO6qjSw0n9aQw/view?usp=sharing)
+  - Resource based routes convention
 
-- a cookie is a small text file that is stored by a browser on the user’s machine
+  - The key abstraction of information in REST is a resource.
 
-- a collection of key-value pairs that store information
-  - shopping-cart, game scores, ads, and logins
+  - REST uses a resource identifier to identify the particular resource involved in an interaction between components.
 
-`name=Linguini; style=classy;`
+  - It should use http verbs to express what the request wants to accomplish
+  - Resource information must be part of the url
+  - It uses common data formats (JSON for API)
+  - Communication is stateless
+  - Each request must pass all information needed to fulfill the request
+  - Idempotency of requests
 
-- The response header will set the cookie
+### http methods
 
-  Set-Cookie: <em>value</em>[; expires=<em>date</em>][; domain=<em>domain</em>][; path=<em>path</em>][; secure]
+What language does a client use to makes request to the server ? http
 
-- The browser will store the cookie
-- The browser will send the cookie in the request headers of subsequent requests
-- can be set for a specific domain
-- can have an expiration date, if not session cookie
+http protocol gives us verbs
 
-### Using cookie-parser
+- Create => Create a new ressource => Post
+- Read => Get a resource => Get
+- Update => Change a resource => Put
+- Delete => Delete a resource => Delete
 
-- We're going to store the user id in the cookies
-- We need to install a middleware in Express to process the cookie: cookie-parser
-  - setting the cookie: res.cookie('cookieName','cookieValue')
-  - reading the cookie: req.cookies.cookieName
+### Scoping information
+
+- collections vs single entity
+- which one?
+
+### End Points
+
+By following REST principles, it allows us to design our end points:
+
+| Action                                | http verb | end point                |
+| ------------------------------------- | --------- | ------------------------ |
+| List all quotes                       | GET       | get '/quotes'            |
+| Get a specific quote                  | GET       | get '/quotes/:id'        |
+| Display the new form                  | GET       | get '/quotes/new         |
+| Create a new quote                    | POST      | post '/quotes            |
+| Display the form for updating a quote | GET       | get '/quotes/:id/update' |
+| Update the quotes                     | PUT       | put '/quotes/:id         |
+| Deleting a specific quote             | DELETE    | delete '/quotes:id'      |
+
+#### Nested Resources
+
+You may need to access a nested resources. For example, you need to create a new comment.
+
+| Action               | http verb | end point                  |
+| -------------------- | --------- | -------------------------- |
+| Create a new comment | POST      | post '/quotes/:id/comments |
+
+## Middleware
+
+- Middleware is a piece of software that sits in between the request and the response.
+
+## Better Organize our Code
+
+We can better organize our code to make more modular and to clean up our server file.
+
+- Routing
+
+  - We externalize to our routes into specific files
+  - All the routes for a particular resource would be in one file
+
+- We can use modules to externalize:
+
+  - our DB files
+  - our helper functions
+
+### Common Data Format
+
+In the case of an API, what do we expect when we do
+
+GET users => a list of users returned with a JSON format
+
+```json
+[
+  {"id": "1",
+  "first_name": "Clark",
+  "last_name": "Kent",
+  ...},
+  {"id": "2",
+  "first_name": "Bruce",
+  "last_name": "Wayne",
+  ...},
+]
+```
+
+### REST alternatives
+
+- GraphQL
+
+GraphQL is an open-source data query and manipulation language for APIs, and a runtime for fulfilling queries with existing data. GraphQL was developed internally by Facebook in 2012 before being publicly released in 2015.
+
+## Alternatives to Express
+
+Koa.js (Javascript) - https://koajs.com/
+Sinatra (Ruby) - http://sinatrarb.com/
+Flask (Python) - http://flask.pocoo.org/
+
+## Back-End API
+
+- An API will only deliver data, typically in JSON
+- The routes will add a version of the API
+
+For example, if we were building an API, our routes would be modified.
+
+- `GET /api/1.0/posts`
+- `GET /api/1.0/posts/1`
+  ...
+
+## References
+
+Interesting links
+About REST and naming convention : https://restfulapi.net/resource-naming/
+Express modular routing (end of document) : http://expressjs.com/en/guide/routing.html#routing
+Method override : https://www.npmjs.com/package/method-override
+Express middleware : https://expressjs.com/en/guide/using-middleware.html
+JSON APIs responses : https://jsonapi.org/examples
+WordPress REST API : https://developer.wordpress.org/rest-api/
+https://restfulapi.net/
