@@ -4,6 +4,11 @@ const saltRounds = 10;
 
 
 module.exports = (movieQuotesDb, quoteComments, usersDb) => {
+
+  const getQuoteList = () => {
+    return Object.values(movieQuotesDb);
+  }
+
   const createNewQuote = (content) => {
     const quoteId = uuid().substr(0, 8);
 
@@ -22,6 +27,8 @@ module.exports = (movieQuotesDb, quoteComments, usersDb) => {
 
   const updateQuote = (quoteId, content) => {
     // updating the quote key in the quote object
+
+    console.log({quoteId});
     movieQuotesDb[quoteId].quote = content;
 
     return true;
@@ -76,11 +83,21 @@ module.exports = (movieQuotesDb, quoteComments, usersDb) => {
     }
   };
 
+  const getCurrentUser = id => usersDb[id];
+
+  const getMovieQuote = id => movieQuotesDb[id];
+  
+  const deleteQuote = id => delete movieQuotesDb[id]
+
   return {
+    getQuoteList,
     createNewQuote,
     updateQuote,
     addNewUser,
     authenticateUser,
     findUserByEmail,
+    getCurrentUser,
+    getMovieQuote,
+    deleteQuote
   };
 };
