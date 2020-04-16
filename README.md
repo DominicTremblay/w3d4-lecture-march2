@@ -17,6 +17,9 @@
 - How to encrypt passwords (bcrypt)
 - hashing
 
+- [bcrypt.jpg](./bcrypt.jpg)
+(ref: https://www.mdpi.com/2410-387X/1/2/10)
+
 ### Security Issue #2
 
 - User can see data in cookie and modify, becoming any other user
@@ -29,6 +32,8 @@
 - Man-in-the-middle (we know NSA, etc. do this)
 - Firesheep: https://en.wikipedia.org/wiki/Firesheep
 - Solution: HTTPS (End-to-End Encryption)
+
+- [Man-In-The-Middle-Attack.png](./Man-In-The-Middle-Attack.png)
 
 ## REST
 
@@ -90,6 +95,9 @@ You may need to access a nested resources. For example, you need to create a new
 ## Middleware
 
 - Middleware is a piece of software that sits in between the request and the response.
+- [middleware.png](./middleware.png)
+(ref: https://developer.okta.com/blog/2018/09/13/build-and-understand-express-middleware-through-examples)
+
 
 ## Better Organize our Code
 
