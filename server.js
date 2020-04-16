@@ -70,13 +70,8 @@ const usersDb = {
   },
 };
 
-const createNewQuote = content => {
+const createNewQuote = (content) => {
   const quoteId = uuid().substr(0, 8);
-
-  // {
-  //   id: 'd9424e04',
-  //   quote: 'Why so serious?',
-  // }
 
   // creating the new quote object
   const newQuote = {
@@ -92,11 +87,6 @@ const createNewQuote = content => {
 };
 
 const updateQuote = (quoteId, content) => {
-  // d9424e04: {
-  //   id: 'd9424e04',
-  //   quote: 'Why so serious?',
-  // }
-
   // updating the quote key in the quote object
   movieQuotesDb[quoteId].quote = content;
 
@@ -106,14 +96,6 @@ const updateQuote = (quoteId, content) => {
 const addNewUser = (name, email, password) => {
   // Generate a random id
   const userId = uuid().substr(0, 8);
-
-  // Create a new user object
-  //  {
-  //    id: 'eb849b1f',
-  //      name: 'Kent Cook',
-  //        email: 'really.kent.cook@kitchen.com',
-  //          password: 'cookinglessons',
-  //  }
 
   const newUserObj = {
     id: userId,
@@ -131,10 +113,7 @@ const addNewUser = (name, email, password) => {
   return userId;
 };
 
-const findUserByEmail = email => {
-  // const user = Object.values(usersDb).find(userObj => userObj.email === email)
-  //  return user;
-
+const findUserByEmail = (email) => {
   // loop through the usersDb object
   for (let userId in usersDb) {
     // compare the emails, if they match return the user obj
@@ -252,8 +231,6 @@ app.get('/quotes', (req, res) => {
   const templateVars = { quotesArr: quoteList, currentUser: loggedInUser };
 
   res.render('quotes', templateVars);
-
-  // res.json(movieQuotesDb);
 });
 
 // Display the add quote form
@@ -331,7 +308,6 @@ app.post('/quotes/:id', (req, res) => {
 });
 
 // DELETE
-
 app.post('/quotes/:id/delete', (req, res) => {
   const quoteId = req.params.id;
 
