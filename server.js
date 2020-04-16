@@ -56,13 +56,13 @@ const quoteComments = {
 };
 
 const usersDb = {
-  eb849b1f: {
+  '1': {
     id: 'eb849b1f',
     name: 'Kent Cook',
     email: 'really.kent.cook@kitchen.com',
     password: 'cookinglessons',
   },
-  '1dc937ec': {
+  '2': {
     id: '1dc937ec',
     name: 'Phil A. Mignon',
     email: 'good.philamignon@steak.com',
