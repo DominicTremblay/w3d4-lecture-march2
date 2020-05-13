@@ -17,7 +17,7 @@
 - How to encrypt passwords (bcrypt)
 - hashing
 
-- [bcrypt](./images/bcrypt.jpg)
+- [bcrypt](./bcrypt.jpg)
 
 ### Security Issue #2
 
@@ -29,11 +29,10 @@
 - Stealing cookies
 - HTTP is plain-text
 - Man-in-the-middle (we know NSA, etc. do this)
-- [Man-in-the-middle attack](./images/Man-In-The-Middle-Attack.png)
+- [Man-in-the-middle attack](./Man-In-The-Middle-Attack.png)
 - Firesheep: https://en.wikipedia.org/wiki/Firesheep
 - Solution: HTTPS (End-to-End Encryption)
 
-- [Man-In-The-Middle-Attack.png](./Man-In-The-Middle-Attack.png)
 
 ## REST
 
@@ -100,8 +99,6 @@ You may need to access a nested resources. For example, you need to create a new
 - [middleware.png](./middleware.png)
 (ref: https://developer.okta.com/blog/2018/09/13/build-and-understand-express-middleware-through-examples)
 
-
-- [Middleware](./images/middleware.png)
 
 ## Better Organize our Code
 
