@@ -78,10 +78,10 @@ By following REST principles, it allows us to design our end points:
 | List all quotes                       | GET       | get '/quotes'            |
 | Get a specific quote                  | GET       | get '/quotes/:id'        |
 | Display the new form                  | GET       | get '/quotes/new         |
-| Create a new quote                    | POST      | post '/quotes            |
+| Create a new quote                    | POST      | post '/quotes'            |
 | Display the form for updating a quote | GET       | get '/quotes/:id/update' |
 | Update the quotes                     | PUT       | put '/quotes/:id         |
-| Deleting a specific quote             | DELETE    | delete '/quotes:id'      |
+| Deleting a specific quote             | DELETE    | delete '/quotes/:id'      |
 
 #### Nested Resources
 
